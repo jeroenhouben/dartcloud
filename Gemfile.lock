@@ -88,7 +88,7 @@ GEM
     mime-types (1.21)
     minitest (4.6.2)
     multi_json (1.6.1)
-    mysql2 (0.3.11)
+    pg (0.14.1)
     polyglot (0.3.3)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -132,7 +132,7 @@ DEPENDENCIES
   ember-rails
   jquery-rails
   less-rails
-  mysql2
+  pg
   rails!
   therubyracer
   twitter-bootstrap-rails
