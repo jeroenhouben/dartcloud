@@ -3,38 +3,38 @@ module Api
     class MatchesController < ApplicationController
       respond_to :json
 
-      # GET /matches
+      # GET /mes
       def index
         render json: Match.all
       end
 
-      # GET /matches/1
+      # GET /mes/1
       def show
-        match = Match.find(params[:id])
-        render json: match
+        m = Match.find(params[:id])
+        render json: m
       end
 
-      # POST /matches
+      # POST /mes
       def create
-        match = Match.new(match_params) {|m| m.id = params[:match][:id]}
-        if match.save
-          render json: match, status: :created
+        m = Match.new(match_params) {|m| m.id = match_params[:id]} # use the primary key sent by the client
+        if m.save
+          render json: m, status: :created
         else
-          render json: match.errors, status: :unprocessable_entity
+          render json: m.errors, status: :unprocessable_entity
         end
       end
 
-      # PATCH/PUT /matches/1
+      # PATCH/PUT /mes/1
       def update
-        match = Match.find(params[:id])
-        if match.update(match_params)
-          render json: match, status: :updated
+        m = Match.find(params[:id])
+        if m.update(match_params)
+          render json: m, status: :updated
         else
-          render json: match.errors, status: :unprocessable_entity
+          render json: m.errors, status: :unprocessable_entity
         end
       end
 
-      # DELETE /matches/1
+      # DELETE /mes/1
       def destroy
         m = Match.find(params[:id]).destroy
         render json: m
