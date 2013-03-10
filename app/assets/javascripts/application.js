@@ -17,9 +17,8 @@
 //= require ember-data
 //= require_self
 //= require dartcloud
+//= require_tree ./libs
 window.App = Ember.Application.create({
   rootElement: '#main',
   LOG_TRANSITIONS: true
 });
-//= require_tree ./lib
-//= require_tree .
