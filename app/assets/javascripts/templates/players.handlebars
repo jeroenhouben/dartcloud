@@ -1,0 +1,20 @@
+<section id="setup">
+	<div class="row centered">
+	  <div class="span6 offset3">
+			<div class="row centered">
+				<div class="page-header">
+					<h1>They be Dartin&#8217;</h1>
+				</div>
+				<ol class="unstyled">
+			    {{#each player in controller}}
+						<li>{{view Ember.TextField valueBinding="player.name"}}</li>
+			    {{/each}}
+				</ol>
+
+				<a {{action "startLeg"}} class="btn btn-large btn-primary btn-block"  href="#">
+					<i class="icon-white"></i> Game On!
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
