@@ -1,8 +1,11 @@
 App.IndexController = Ember.Controller.extend({
 
   newMatch: function() {
-    var match = App.Match.createRecord();
-    this.transitionToRoute('match.setup', match)
+    var transaction = this.get('store').transaction();
+    var m = transaction.createRecord(App.Match, {});
+    transaction.commit();
+    this.set('content', m);
+    this.transitionToRoute('match.setup', m)
   }
 
 });
