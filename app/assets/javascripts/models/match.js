@@ -5,10 +5,13 @@ App.Match = DS.Model.extend({
 
   // create a new Leg and enroll all players known in this match
   createNewLeg: function() {
-    var leg = this.get('legs').createRecord();
+    var t   = this.transaction,
+        leg = t.createRecord(App.Leg, {match: this})
+
+  
     // enroll players in leg by creating the join model
     this.get('players').forEach(function(player) {
-      leg.get('players').createRecord({player: player})
+      t.createRecord(App.LegPlayer, {player: player, leg: leg})
     });
     return leg;
   },

@@ -1,3 +1,6 @@
 class MatchSerializer < ActiveModel::Serializer
-  attributes :id, :id, :start_score
+  attributes :id, :start_score
+
+  has_many :legs, embed: :objects
+
 end

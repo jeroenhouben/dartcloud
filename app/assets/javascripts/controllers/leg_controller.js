@@ -6,7 +6,7 @@ App.LegController = Ember.ObjectController.extend({
   currentPlayerIndex: null,
 
   currentPlayer: function() {
-    return this.get('players').objectAt(this.get('currentPlayerIndex'));
+    return this.get('legPlayers').objectAt(this.get('currentPlayerIndex'));
   }.property('currentPlayerIndex'),
   /*
   * get (or create!) the player's last turn

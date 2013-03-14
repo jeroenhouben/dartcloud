@@ -4,6 +4,6 @@
 */
 App.Leg = DS.Model.extend({
   match: DS.belongsTo('App.Match'),
-  players: DS.hasMany('App.LegPlayer'),
+  legPlayers: DS.hasMany('App.LegPlayer'),
   winner: DS.belongsTo('App.Player')
 });

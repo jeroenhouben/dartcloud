@@ -43,7 +43,7 @@ module Api
       private
         # Only allow a trusted parameter "white list" through.
         def match_params
-          params.require(:match).permit(:id, :start_score)
+          params.require(:match).permit(:id, :start_score, legs: [:id, :match_id, :winner_id])
         end
     end
   end
