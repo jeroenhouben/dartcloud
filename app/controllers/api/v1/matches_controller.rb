@@ -3,28 +3,43 @@ module Api
     class MatchesController < ApplicationController
       respond_to :json
 
-      # GET /mes
+      # GET /matches
       def index
         render json: Match.all
       end
 
-      # GET /mes/1
+      # GET /matches/1
       def show
         m = Match.find(params[:id])
         render json: m
       end
 
-      # POST /mes
+      # POST /matches
       def create
+        match_params = permitted_params
+
+        legs = match_params.extract!(:legs).fetch(:legs, [])
+        players = match_params.extract!(:players).fetch(:players, [])
+        
         m = Match.new(match_params) {|m| m.id = match_params[:id]} # use the primary key sent by the client
-        if m.save
+        
+        Match.transaction do
+          m.save!
+          legs.each {|leg_params| Leg.new(leg_params) {|l| l.id = leg_params[:id]}.save! }
+          players.each do |player_params| 
+            p = Player.find_or_create_by! id: player_params[:id], name: player_params[:name]
+            MatchPlayer.create!(player_id: p.id, match_id: m.id)
+          end
+        end
+                
+        if 
           render json: m, status: :created
         else
           render json: m.errors, status: :unprocessable_entity
         end
       end
 
-      # PATCH/PUT /mes/1
+      # PATCH/PUT /matches/1
       def update
         m = Match.find(params[:id])
         if m.update(match_params)
@@ -34,7 +49,7 @@ module Api
         end
       end
 
-      # DELETE /mes/1
+      # DELETE /matches/1
       def destroy
         m = Match.find(params[:id]).destroy
         render json: m
@@ -42,8 +57,12 @@ module Api
 
       private
         # Only allow a trusted parameter "white list" through.
-        def match_params
-          params.require(:match).permit(:id, :start_score, legs: [:id, :match_id, :winner_id])
+        def permitted_params
+          params.require(:match).permit(
+            :id, :start_score, 
+            legs: [:id, :match_id, :winner_id],
+            players: [:id, :name]
+          )
         end
     end
   end
