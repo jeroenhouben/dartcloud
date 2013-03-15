@@ -5,4 +5,6 @@ class LegPlayer < ActiveRecord::Base
  belongs_to :leg
  belongs_to :player
 
+ before_create { |record| record.id = SecureRandom.uuid  }
+
 end

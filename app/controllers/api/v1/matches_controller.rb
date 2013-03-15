@@ -18,17 +18,26 @@ module Api
       def create
         match_params = permitted_params
 
-        legs = match_params.extract!(:legs).fetch(:legs, [])
+        legs    = match_params.extract!(:legs).fetch(:legs, [])
         players = match_params.extract!(:players).fetch(:players, [])
         
         m = Match.new(match_params) {|m| m.id = match_params[:id]} # use the primary key sent by the client
         
         Match.transaction do
           m.save!
-          legs.each {|leg_params| Leg.new(leg_params) {|l| l.id = leg_params[:id]}.save! }
-          players.each do |player_params| 
+          players.each do |player_params|
             p = Player.find_or_create_by! id: player_params[:id], name: player_params[:name]
             MatchPlayer.create!(player_id: p.id, match_id: m.id)
+          end
+          legs.each do |leg_params| 
+            leg_players = leg_params.extract!(:leg_players).fetch(:leg_players, [])
+            Leg.new(leg_params) do |leg| 
+              leg.id = leg_params[:id]
+              leg.save!
+              leg_players.each do |lp_params|
+                LegPlayer.create!(leg_id: leg.id, player_id: lp_params[:player_id])
+              end
+            end
           end
         end
                 
@@ -60,7 +69,7 @@ module Api
         def permitted_params
           params.require(:match).permit(
             :id, :start_score, 
-            legs: [:id, :match_id, :winner_id],
+            legs: [:id, :match_id, :winner_id, leg_players: [:leg_id, :player_id]],
             players: [:id, :name]
           )
         end

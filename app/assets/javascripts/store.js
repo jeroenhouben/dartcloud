@@ -14,7 +14,7 @@ App.Adapter.configure("plurals", {
 });
 
 App.Adapter.map('App.Leg', {
-  players: {embedded: 'always'}
+  legPlayers: {embedded: 'always'}
 });
 
 App.Adapter.map('App.Match', {
