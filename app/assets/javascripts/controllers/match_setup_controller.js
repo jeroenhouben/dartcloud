@@ -25,14 +25,20 @@ App.MatchSetupController = Ember.ObjectController.extend({
   * set selectedPlayers using player IDs
   */
   setPlayersById: function(ids) {
-    this.get('model.players').set('content', ids.map(function(id) { return App.Player.find(id) }));
+    this.get('model.players').set('content', ids.map(function(id) { return App.Player.find(id) } ));
   },
 
   start: function() {
-    // create a first Leg
+    // create a new Leg and enroll all players known in this match
     var match = this.get('model'),
-        leg   = match.createNewLeg();
-
+        t   = match.transaction,
+        leg = match.get('legs').createRecord();
+  
+    // enroll players in leg by creating the join model
+    match.get('players').forEach(function(player) {
+      leg.get('legPlayers').createRecord({player: player})
+    });
+    
     match.transaction.commit();
     this.transitionToRoute('leg', match, leg);
   },

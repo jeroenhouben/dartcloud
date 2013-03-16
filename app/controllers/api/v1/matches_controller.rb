@@ -11,6 +11,7 @@ module Api
       # GET /matches/1
       def show
         m = Match.find(params[:id])
+        m.serialize_associations = true
         render json: m
       end
 
@@ -40,7 +41,7 @@ module Api
             end
           end
         end
-                
+        
         if 
           render json: m, status: :created
         else
@@ -69,7 +70,7 @@ module Api
         def permitted_params
           params.require(:match).permit(
             :id, :start_score, 
-            legs: [:id, :match_id, :winner_id, leg_players: [:leg_id, :player_id]],
+            legs: [:id, :match_id, :winner_id, leg_players: [:leg_id, :player_id, :id]],
             players: [:id, :name]
           )
         end

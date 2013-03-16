@@ -93,14 +93,14 @@ App.TurnController = Ember.ObjectController.extend({
   
   advanceTurn: function() {
     var nextPlayer,
-        players = this.get('leg.players'),
+        legPlayers = this.get('leg.legPlayers'),
         currentPlayerIndex = this.get('currentPlayerIndex');
         
     // get next player
-    if (currentPlayerIndex == players.get('length')-1) {
-      nextPlayer = players.get('firstObject');
+    if (currentPlayerIndex == legPlayers.get('length')-1) {
+      nextPlayer = legPlayers.get('firstObject');
     } else {
-      nextPlayer = players.objectAt(currentPlayerIndex+1);
+      nextPlayer = legPlayers.objectAt(currentPlayerIndex+1);
     }
     this.transitionToRoute('turn', this.get('controllers.leg').nextTurnForPlayer(nextPlayer));
   },
@@ -114,12 +114,12 @@ App.TurnController = Ember.ObjectController.extend({
   },
 
   currentPlayerIndex: function() {
-    var players = this.get('leg.players'), 
+    var legPlayers = this.get('leg.legPlayers'), 
         currentPlayer = this.get('player'),
         idx;
         
-    players.forEach(function(player,i) {
-      if (player==currentPlayer) idx = i; return;
+    legPlayers.forEach(function(lp,i) {
+      if (lp==currentPlayer) idx = i; return;
     });
     return idx;
   }.property('content'),

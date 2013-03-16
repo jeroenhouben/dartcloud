@@ -21,7 +21,7 @@
 
 	<div id="scoreboard-wrapper">
 			<ol class="unstyled">
-				{{#each player in players}}
+				{{#each player in legPlayers}}
 				<li class="scores-for-player">
 					<h4 {{action gotoNextTurnForPlayer player}}>{{player.name}}</h4>
 					<ol class="unstyled">
