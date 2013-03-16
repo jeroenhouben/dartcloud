@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/rails/rails.git
-  revision: d25a82280f977664e3b3d49c13bb68502718f6e2
+  revision: 19797df29e97c22c2e045c832a89e901bdd6ba8c
   specs:
     actionmailer (4.0.0.beta1)
       actionpack (= 4.0.0.beta1)
@@ -18,7 +18,7 @@ GIT
       activemodel (= 4.0.0.beta1)
       activerecord-deprecated_finders (~> 0.0.3)
       activesupport (= 4.0.0.beta1)
-      arel (~> 4.0.0.beta1)
+      arel (~> 4.0.0.beta2)
     activesupport (4.0.0.beta1)
       i18n (~> 0.6, >= 0.6.4)
       minitest (~> 4.2)
@@ -46,7 +46,7 @@ GEM
     active_model_serializers (0.7.0)
       activemodel (>= 3.0)
     activerecord-deprecated_finders (0.0.3)
-    arel (4.0.0.beta1)
+    arel (4.0.0.beta2)
     atomic (1.0.1)
     barber (0.4.1)
       ember-source
@@ -89,7 +89,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.21)
     minitest (4.6.2)
-    multi_json (1.6.1)
+    multi_json (1.7.0)
     pg (0.14.1)
     polyglot (0.3.3)
     rack (1.5.2)
