@@ -41,7 +41,7 @@ module Api
           end
         end
         
-        if 
+        if m.persisted?
           m.shallow_serialize = true
           render json: m, status: :created
         else

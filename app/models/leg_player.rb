@@ -7,8 +7,6 @@ class LegPlayer < ActiveRecord::Base
 
  has_many :turns, :dependent => :destroy
 
- before_create { |record| record.id = SecureRandom.uuid  }
-
  attr_accessor :shallow_serialize
 
  

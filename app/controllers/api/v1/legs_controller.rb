@@ -6,7 +6,6 @@ module Api
       # GET /legs/1
       def show
         leg = Leg.find(params[:id])
-        m.serialize_associations = true
         render json: leg
       end
     end

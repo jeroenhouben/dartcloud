@@ -29,7 +29,7 @@ App.Adapter.configure("App.Match", {
 
 
 App.Adapter.map('App.Leg', {
-  legPlayers: {embedded: 'always'}
+  leg_players: {embedded: 'always'}
 });
 
 App.Adapter.map('App.Match', {
