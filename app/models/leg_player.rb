@@ -5,6 +5,8 @@ class LegPlayer < ActiveRecord::Base
  belongs_to :leg
  belongs_to :player
 
+ has_many :turns, :dependent => :destroy
+
  before_create { |record| record.id = SecureRandom.uuid  }
 
 end
