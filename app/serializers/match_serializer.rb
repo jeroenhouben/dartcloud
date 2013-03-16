@@ -1,8 +1,10 @@
 class MatchSerializer < ActiveModel::Serializer
   attributes :id, :start_score
 
-  has_many :legs, embed: :ids
-  has_many :players, embed: :ids
+  embed :ids, :include => true
+  
+  has_many :legs
+  has_many :players
 
   def include_associations!
     include! :legs if object.serialize_associations
