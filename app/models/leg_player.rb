@@ -9,4 +9,7 @@ class LegPlayer < ActiveRecord::Base
 
  before_create { |record| record.id = SecureRandom.uuid  }
 
+ attr_accessor :shallow_serialize
+
+ 
 end

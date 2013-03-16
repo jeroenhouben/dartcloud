@@ -11,7 +11,6 @@ module Api
       # GET /matches/1
       def show
         m = Match.find(params[:id])
-        m.serialize_associations = true
         render json: m
       end
 
@@ -43,6 +42,7 @@ module Api
         end
         
         if 
+          m.shallow_serialize = true
           render json: m, status: :created
         else
           render json: m.errors, status: :unprocessable_entity

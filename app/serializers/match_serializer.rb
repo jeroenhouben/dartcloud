@@ -7,8 +7,8 @@ class MatchSerializer < ActiveModel::Serializer
   has_many :players
 
   def include_associations!
-    include! :legs if object.serialize_associations
-    include! :players if object.serialize_associations
+    include! :legs unless object.shallow_serialize
+    include! :players unless object.shallow_serialize
   end  
 
 end

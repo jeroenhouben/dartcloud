@@ -6,6 +6,6 @@ class Leg < ActiveRecord::Base
   belongs_to :winner
   has_many :leg_players, :dependent => :destroy
 
- attr_accessor :serialize_associations
+  attr_accessor :shallow_serialize
 
 end

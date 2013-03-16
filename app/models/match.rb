@@ -6,6 +6,6 @@ class Match < ActiveRecord::Base
  has_many :match_players, :dependent => :destroy
  has_many :players, :through => :match_players
 
- attr_accessor :serialize_associations
+ attr_accessor :shallow_serialize
 
 end
