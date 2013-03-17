@@ -42,7 +42,7 @@ module Api
         end
         
         if m.persisted?
-          m.shallow_serialize = true
+          # m.shallow_serialize = true
           render json: m, status: :created
         else
           render json: m.errors, status: :unprocessable_entity

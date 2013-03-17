@@ -31,15 +31,13 @@ App.MatchSetupController = Ember.ObjectController.extend({
   start: function() {
     // create a new Leg and enroll all players known in this match
     var match = this.get('model'),
-        t   = match.transaction,
         leg = match.get('legs').createRecord();
   
     // enroll players in leg by creating the join model
     match.get('players').forEach(function(player) {
       leg.get('legPlayers').createRecord({player: player})
     });
-    
-    match.transaction.commit();
+    window.mm=match;
     this.transitionToRoute('leg', match, leg);
   },
   

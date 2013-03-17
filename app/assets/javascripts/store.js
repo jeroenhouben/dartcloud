@@ -39,6 +39,7 @@ App.Adapter.map('App.Match', {
 
 App.Adapter.map('App.LegPlayer', {
   // winner: {embedded: 'always'}
+  turns: {embedded: 'always'}
 });
 
 
