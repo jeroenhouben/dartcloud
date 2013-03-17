@@ -20,10 +20,6 @@ App.TurnController = Ember.ObjectController.extend({
     return (this.get('dart3') != null);
   }.property('dart1','dart2','dart3', 'simpleScore'),
   
-  requiredScore: function() {
-    return this.get('player.requiredScore');
-  }.property('player.requiredScore'),
-  
   registerThrow: function(number) {
     if (this.get('isNumpadSimple')) {
       this.addSimpleScore(number);
