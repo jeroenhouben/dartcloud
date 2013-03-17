@@ -4,10 +4,6 @@ App.TurnController = Ember.ObjectController.extend({
   selectedMultiplier: 1,
   numpadType: 'extended',
 
-  leg: function() {
-    return this.get('player.leg');
-  }.property('player.leg'),
-
   selectDart: function(dartNumber) {
     this.set('selectedDart', dartNumber)
     this.set('dart'+this.selectedDart, null);
@@ -81,7 +77,7 @@ App.TurnController = Ember.ObjectController.extend({
     // could do better here.. how do we know he threw a double in simple view ??? FIXME????
     if (rs === 0) {
       var leg = this.get('leg');
-      leg.set('winner', this.get('player.player'));
+      leg.set('winner', this.get('legPlayer.player'));
       this.transitionToRoute('leg.finish', leg);
     } else if (rs < 0) {
       this.registerBust();
@@ -111,11 +107,12 @@ App.TurnController = Ember.ObjectController.extend({
     this.set('dart3', null);
     this.set('simpleScore', null);
     this.set('completed', false);
+    this.set('selectedMultiplier', 1);
   },
 
   currentPlayerIndex: function() {
     var legPlayers = this.get('leg.legPlayers'), 
-        currentPlayer = this.get('player'),
+        currentPlayer = this.get('legPlayer'),
         idx;
         
     legPlayers.forEach(function(lp,i) {
