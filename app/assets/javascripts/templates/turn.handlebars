@@ -64,9 +64,9 @@
 
 <div id="latest-scores">
 	<ol class="unstyled">
-  {{#each leg.players}}
+	{{#each controllers.leg.allScores}}
 	<li {{bindAttr class="isCheckoutPossible:checkout"}}>
-		<h4>{{name}}</h4>
+		<h4>{{player.name}}</h4>
 		<span>{{requiredScore}}</span>
 	</li>
 	{{/each}}

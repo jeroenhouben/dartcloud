@@ -3,10 +3,10 @@ App.TurnController = Ember.ObjectController.extend({
   selectedDart: 1,
   selectedMultiplier: 1,
   numpadType: 'extended',
-
-  leg: function() {
-    return this.get('player.leg');
-  }.property('player.leg'),
+  
+  currentPlayerScores: function() {
+    return this.get('controllers.leg.allScores').objectAt(this.get('currentPlayerIndex'));
+  }.property('currentPlayerIndex'),
 
   selectDart: function(dartNumber) {
     this.set('selectedDart', dartNumber)
@@ -26,10 +26,11 @@ App.TurnController = Ember.ObjectController.extend({
   
   registerThrow: function(number) {
     if (this.get('isNumpadSimple')) {
-      this.addSimpleScore(number);
+      this.setSimpleScore(number);
     } else {
       this.registerExtendedScore(number);
     }
+    this.set('completed', true);
   },
   
   registerExtendedScore: function(number) {
@@ -46,10 +47,10 @@ App.TurnController = Ember.ObjectController.extend({
     }
   },
   
-  addSimpleScore: function(number) {
+  setSimpleScore: function(number) {
     var s = this.get('simpleScore') || "";
-    s = s.toString() + number.toString();
-    if (parseInt(s, 10) > 180) {
+    s = parseInt(s.toString() + number.toString());
+    if (s > 180) {
       return false;
     }
     this.set('simpleScore',  s);
@@ -71,13 +72,14 @@ App.TurnController = Ember.ObjectController.extend({
   },
   
   registerTurn: function() {
-    var s = this.get('score'),
-        rs = this.get('requiredScore');
+    this.get('currentPlayerScores.scores').pushObject(this.get('score'));
+    
+    var rs = this.get('playerScores.requiredScore');
     
     // could do better here.. how do we know he threw a double in simple view ??? FIXME????
     if (rs === 0) {
-      var leg = this.get('leg');
-      leg.set('winner', this.get('player.player'));
+      var leg = this.get('model.leg');
+      leg.set('winner', this.get('model.player'));
       this.transitionToRoute('leg.finish', leg);
     } else if (rs < 0) {
       this.registerBust();
@@ -89,7 +91,7 @@ App.TurnController = Ember.ObjectController.extend({
   
   advanceTurn: function() {
     var nextPlayer,
-        players = this.get('leg.players'),
+        players = this.get('model.leg.players'),
         currentPlayerIndex = this.get('currentPlayerIndex');
         
     // get next player
@@ -110,7 +112,7 @@ App.TurnController = Ember.ObjectController.extend({
   },
 
   currentPlayerIndex: function() {
-    var players = this.get('leg.players'), 
+    var players = this.get('model.leg.players'), 
         currentPlayer = this.get('player'),
         idx;
         
@@ -118,7 +120,7 @@ App.TurnController = Ember.ObjectController.extend({
       if (player==currentPlayer) idx = i; return;
     });
     return idx;
-  }.property('content'),
+  }.property('model'),
   
   toggleNumpadType: function() {
     var t = this.get('numpadType'),
@@ -143,12 +145,10 @@ App.TurnController = Ember.ObjectController.extend({
   isNumpadSimple: function() {return this.get('numpadType') === 'simple'}.property('numpadType'),
   isNumpadExtended: function() {return this.get('numpadType') === 'extended'}.property('numpadType'),
 
-  isCheckoutPossible: function() {return this.get('player.isCheckoutPossible')}.property('player.isCheckoutPossible'),
-  
   turnChanged: function(sender, key, value) {
     this.set('selectedDart', 1)
     this.set('selectedMultiplier', 1);
     this.set('controllers.leg.currentPlayerIndex', this.get('currentPlayerIndex'));
-  }.observes('content'),
+  }.observes('model'),
   
 });

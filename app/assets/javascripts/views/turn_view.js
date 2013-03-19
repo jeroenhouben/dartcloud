@@ -23,7 +23,7 @@ App.TurnView = Ember.View.extend({
         nr = (kc > 58) ? kc-96 : kc-48;
         
         this.controller.set('numpadType', 'simple');
-        this.controller.addSimpleScore(nr);
+        this.controller.setSimpleScore(nr);
         return;
       }
 

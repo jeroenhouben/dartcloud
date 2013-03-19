@@ -1,5 +1,4 @@
 <section class="scoreboard">
-
 	<div class="top">
 	  <div class="nav">
 	  	<button {{action newMatch}} type="button" class="btn btn-primary"}}>Home</button>
@@ -21,22 +20,18 @@
 
 	<div id="scoreboard-wrapper">
 			<ol class="unstyled">
-				{{#each player in players}}
+				{{#each allScores}}
 				<li class="scores-for-player">
 					<h4 {{action gotoNextTurnForPlayer player}}>{{player.name}}</h4>
 					<ol class="unstyled">
-						{{#each player.turns}}
+						{{#each score in scores}}
 							<li>
 								{{#linkTo turn this}}
-								{{#if completed}}
 									<span>-</span>{{score}}
-								{{else}}
-									...
-								{{/if}}
 								{{/linkTo}}
 							</li>
 						{{/each}}
-						<li><strong>{{player.requiredScore}}</strong></li>
+						<li><strong>{{requiredScore}}</strong></li>
 					</ol>
 				</li>
 				{{/each}}

@@ -23,6 +23,20 @@ App.LegFinishRoute = Ember.Route.extend({
 
 });    
 
+App.LegRoute = Ember.Route.extend({
+
+  setupController: function(controller, model) {
+    if (controller.get('allScores.length') > 0) {
+      // already initialized
+    } else {
+      model.get('players').forEach(function(player) {
+        controller.get('allScores').pushObject(App.LegScores.create({player: player, leg: model, scores: []}))
+      })
+    }
+  }
+
+});    
+
 
 App.MatchSetupRoute = Ember.Route.extend({
 
