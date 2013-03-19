@@ -1,4 +1,14 @@
 GIT
+  remote: git://github.com/mongoid/mongoid.git
+  revision: 3166986b66a5f386c71ad4a13b019865ba872b2b
+  specs:
+    mongoid (4.0.0)
+      activemodel (~> 4.0.0.beta)
+      moped (~> 1.4.2)
+      origin (~> 1.0)
+      tzinfo (~> 0.3.22)
+
+GIT
   remote: git://github.com/rails/rails.git
   revision: a46cda11f02dd1225fe608ca9e38df2f52891320
   specs:
@@ -89,7 +99,9 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.21)
     minitest (4.7.0)
+    moped (1.4.3)
     multi_json (1.7.1)
+    origin (1.0.11)
     pg (0.14.1)
     polyglot (0.3.3)
     rack (1.5.2)
@@ -138,6 +150,7 @@ DEPENDENCIES
   ember-rails
   jquery-rails
   less-rails
+  mongoid!
   pg
   rails!
   therubyracer

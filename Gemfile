@@ -8,6 +8,7 @@ gem 'pg'
 gem 'jquery-rails'
 gem "ember-rails"
 gem "twitter-bootstrap-rails"
+gem "mongoid", github: 'mongoid/mongoid'
 
 # Gems used only for assets and not required
 # in production environments by default.
