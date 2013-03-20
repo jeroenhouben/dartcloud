@@ -30,11 +30,14 @@ App.MatchSetupController = Ember.ObjectController.extend({
 
   start: function() {
     // create a first Leg
-    var leg   = this.get('legs').createRecord(),
-        players = this.get('model.players');
+    var match   = this.get('model'),
+        leg     = this.get('legs').createRecord(),
+        players = match.get('players');
+
+    window.mm = match;
 
     leg.get('players').set('content', players);
-    this.transitionToRoute('leg', this.get('model'), leg);
+    this.transitionToRoute('leg', match, leg);
   },
   
   setStartScore: function(score) {

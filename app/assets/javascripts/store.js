@@ -28,18 +28,15 @@ App.Adapter.configure("plurals", {
 // });
 
 
-// App.Adapter.map('App.Leg', {
-//   legPlayers: {embedded: 'always'}
-// });
-// 
-// App.Adapter.map('App.Match', {
-//   players: {embedded: 'always'},
-//   legs: {embedded: 'always'}
-// });
-// 
-// App.Adapter.map('App.LegPlayer', {
-//   // winner: {embedded: 'always'}
-// });
+App.Adapter.map('App.Leg', {
+  players: {embedded: 'always'},
+  turns: {embedded: 'always'}
+});
+
+App.Adapter.map('App.Match', {
+  players: {embedded: 'always'},
+  legs: {embedded: 'always'}
+});
 
 
 
