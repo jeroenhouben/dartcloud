@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  dart1: 1
+  dart2: 1
+  dart3: 1
+  simple_score: 1
+  completed: false
+
+two:
+  dart1: 1
+  dart2: 1
+  dart3: 1
+  simple_score: 1
+  completed: false
